@@ -1,0 +1,19 @@
+{
+  "name": "Benchmarking Upload",
+  "short_name": "Upload",
+  "description": "This is a POC to test offline upload functionality in the Benchmarking application",
+  "icons": [
+    {
+      "src": "/img/test-icon-b-192x192.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/img/test-icon-b-512x-512.png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#CC0000",
+  "background_color": "#CC0000"
+}
