@@ -9,13 +9,13 @@ import {Row, Col, Button, Panel, Glyphicon} from "react-bootstrap";
 import {push} from "connected-react-router";
 
 interface urlParams {
-    channelId: string;
+    caseId: string;
 }
 
 interface params extends RouteComponentProps<urlParams> {}
 
 interface connectedState {
-    channel: defs.Channel | null;
+    _case: defs.Case | null;
 }
 
 interface connectedDispatch {
@@ -25,19 +25,19 @@ interface connectedDispatch {
 
 const mapStateToProps = (state: defs.State, ownProps: params): connectedState => {
     //select the specific channel from redux matching the channelId route parameter
-    if(state.channels) {
-        const channelId = parseInt(ownProps.match.params.channelId);
-        const channel = state.channels.find(channel => channel.channelId === channelId);
+    if(state.cases) {
+        const channelId = parseInt(ownProps.match.params.caseId);
+        const _case = state.cases.find(c => c.caseId === channelId);
 
-        if(channel) {
+        if (_case) {
             return {
-                channel
+                _case
             };
         }
     }
 
     return {
-        channel: null
+        _case: null
     };
 };
 
@@ -56,12 +56,12 @@ class ViewChannelComponent extends React.Component<fullParams, localState> {
                 <Col xs={12}>
                     <Panel>
                         <Panel.Heading>
-                            Channel Id: {this.props.match.params.channelId}
+                            Channel Id: {this.props.match.params.caseId}
                         </Panel.Heading>
                         <Panel.Body>
                             {
-                                this.props.channel ?
-                                    <div>Channel Name: {this.props.channel.displayName}</div> :
+                                this.props._case ?
+                                    <div>Case Name: {this.props._case.caseName}</div> :
                                     <div>Loading...</div>
                             }
                             <Link to='/channels'>
@@ -71,7 +71,7 @@ class ViewChannelComponent extends React.Component<fullParams, localState> {
                         <Panel.Footer>
                             <Button
                                 onClick={e => {
-                                    this.props.push('/channels');
+                                    this.props.push('/cases');
                                 }}
                             >
                                 <Glyphicon glyph="remove"/> Close

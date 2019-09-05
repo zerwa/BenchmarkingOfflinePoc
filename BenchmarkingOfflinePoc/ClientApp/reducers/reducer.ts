@@ -15,12 +15,12 @@ export const userReducer: Reducer<defs.State['users'], Action> = (state = initia
     return state;
 };
 
-export const initialChannelState: defs.State['channels'] = null;
+export const initialCaseState: defs.State['cases'] = null;
 
-export const channelReducer: Reducer<defs.State['channels']> = (state = initialChannelState, action) => {
+export const caseReducer: Reducer<defs.State['cases']> = (state = initialCaseState, action) => {
     switch(action.type) {
-        case ActionTypes.LOAD_CHANNELS: {
-            return action.channels;
+        case ActionTypes.LOAD_CASES: {
+            return action.cases;
         }
     }
     return state;
@@ -28,6 +28,6 @@ export const channelReducer: Reducer<defs.State['channels']> = (state = initialC
 
 export const createRootReducer = (history: History) => combineReducers<defs.State>({
     users: userReducer,
-    channels: channelReducer,
+    cases: caseReducer,
     router: connectRouter(history)
 });

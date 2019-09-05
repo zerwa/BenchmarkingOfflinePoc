@@ -32,7 +32,10 @@ const store = createStore(
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-        navigator.serviceWorker.register("dist/sw.js");
+        navigator.serviceWorker.register("dist/sw.js")
+            .catch(function () {
+                console.info('Service workers are not supported.');
+            });
     })
 }
 

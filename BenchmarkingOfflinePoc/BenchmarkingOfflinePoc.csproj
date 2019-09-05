@@ -3,12 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <TypeScriptToolsVersion>3.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.5</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
     <DefaultItemExcludes>$(DefaultItemExcludes);node_modules\**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="dbup-core" Version="4.2.0" />
+    <PackageReference Include="dbup-sqlserver" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
@@ -21,9 +23,17 @@
 
   <ItemGroup>
     <None Remove="ClientApp\components\Header.tsx" />
+    <None Remove="Migrations\Script0001 - Create Case table and data.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\Script0001 - Create Case table and data.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\Manual\" />
+    <Folder Include="Models\DatabaseExtensions\" />
+    <Folder Include="Util\" />
     <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>

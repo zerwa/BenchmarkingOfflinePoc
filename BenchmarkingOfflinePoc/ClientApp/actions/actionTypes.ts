@@ -3,17 +3,17 @@ import {RouterAction} from "connected-react-router";
 
 export enum ActionTypes {
     LOAD_USERS = "LOAD_USERS",
-    LOAD_CHANNELS = "LOAD_CHANNELS"
+    LOAD_CASES = "LOAD_CASES"
 }
 
-export type Action = RouterAction | loadUsersAction | loadChannelsAction;
+export type Action = RouterAction | loadUsersAction | loadCasesAction;
 
 export interface loadUsersAction {
     type: ActionTypes.LOAD_USERS;
     users: defs.User[];
 }
 
-export interface loadChannelsAction {
-    type: ActionTypes.LOAD_CHANNELS;
-    channels: defs.Channel[];
+export interface loadCasesAction {
+    type: ActionTypes.LOAD_CASES;
+    channels: defs.Case[];
 }

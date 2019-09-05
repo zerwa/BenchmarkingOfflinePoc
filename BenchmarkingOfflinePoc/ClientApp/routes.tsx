@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Route, Switch, Redirect} from 'react-router';
 import { hot } from 'react-hot-loader/root'
-import {ChannelList} from "./components/Channels";
+import {ChannelList} from "./components/CaseList";
 import {Home} from "./components/Home";
 import { Header } from './components/Header';
 

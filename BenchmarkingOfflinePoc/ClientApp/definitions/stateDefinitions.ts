@@ -2,7 +2,7 @@ import { RouterState } from 'connected-react-router';
 
 export interface State {
     users: User[] | null;
-    channels: Channel[] | null;
+    cases: Case[] | null;
     router: RouterState;
 }
 
@@ -15,13 +15,8 @@ export interface User {
     description: string | null;
 }
 
-export interface Channel {
-    channelId: number;
-    ownerId: number | null;
-    displayName: string;
-    isPublic: boolean;
-    canAnyoneInvite: boolean;
-    isGeneral: boolean;
-    isActiveDirectMessage: boolean;
-    owner?: User;
+export interface Case {
+    caseId: number;
+    caseName: string;
+    caseCode: number;
 }

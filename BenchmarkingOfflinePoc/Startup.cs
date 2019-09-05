@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using BenchmarkingOfflinePoc.Middleware;
+using BenchmarkingOfflinePoc.Services;
+using DbUp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,17 +20,59 @@ namespace BenchmarkingOfflinePoc
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration config { get; }
+        public IHostingEnvironment env { get; }
+        public ILogger log;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env, ILogger<Startup> log)
         {
-            Configuration = configuration;
+            config = configuration;
+            this.env = env;
+            this.log = log;
+
+            RunMigrations();
         }
 
-        public IConfiguration Configuration { get; }
+        private void RunMigrations()
+        {
+            var upgradeEngine = DeployChanges.To
+                .SqlDatabase(config.GetConnectionString("OflinePocConnectionString"))
+                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly(), (string s) => s.StartsWith("BenchmarkingOfflinePoc.Migrations.Script") && (env.IsDevelopment() || !s.Contains("DEVONLY")))
+                .WithTransactionPerScript()
+                .LogToConsole()
+                .Build();
+
+            if (upgradeEngine.IsUpgradeRequired())
+            {
+                log.LogInformation("Database Update required.");
+
+                var result = upgradeEngine.PerformUpgrade();
+
+                if (!result.Successful)
+                {
+                    log.LogError(result.Error, "Failed to run migrations due to an error executing the sql scripts.");
+                    throw result.Error;
+                }
+                log.LogInformation("Completed database upgrade.  The following scripts were executed:");
+
+                foreach (var script in result.Scripts)
+                {
+                    log.LogInformation(script.Name);
+                }
+            }
+            else
+            {
+                log.LogInformation("No database update is required.");
+            }
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<OfflinePocDb>();
+            services.AddScoped<CaseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +89,11 @@ namespace BenchmarkingOfflinePoc
             }
 
             app.UseHttpsRedirection();
+
+            //This middleware turns certain uncaught exceptions into status codes/error responses for the api
+            app.UseExceptionStatusCodes();
+
+            //anything which might generate an API Exception should be down here
 
             //do not attempt to use hot reloading on staging or production
             app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
