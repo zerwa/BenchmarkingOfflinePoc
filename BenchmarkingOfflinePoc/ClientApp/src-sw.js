@@ -2,13 +2,9 @@
 workbox.precaching.cleanupOutdatedCaches();
 
 workbox.routing.registerRoute(
-    /https:\/\/api\.exchangeratesapi\.io\/latest/,
+    new RegExp("/api/cases"),
     new workbox.strategies.NetworkFirst({
-        cacheName: "cases",
-        plugins: [
-            new workbox.expiration.Plugin({
-                maxAgeSeconds: 10 * 60 // 10 minutes
-            })
+        cacheName: "cases"
     ]
   })
 );

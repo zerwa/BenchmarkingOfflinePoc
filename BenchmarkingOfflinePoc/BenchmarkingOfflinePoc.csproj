@@ -22,7 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\actions\CaseActions.tsx" />
     <None Remove="ClientApp\components\Header.tsx" />
+    <None Remove="ClientApp\reducers\CaseReducer.tsx" />
+    <None Remove="ClientApp\reducers\Store.tsx" />
     <None Remove="Migrations\Script0001 - Create Case table and data.sql" />
   </ItemGroup>
 
@@ -45,7 +48,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\actions\CaseActions.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Header.tsx" />
+    <TypeScriptCompile Include="ClientApp\reducers\CaseReducer.tsx" />
+    <TypeScriptCompile Include="ClientApp\store\Store.tsx" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('node_modules') ">

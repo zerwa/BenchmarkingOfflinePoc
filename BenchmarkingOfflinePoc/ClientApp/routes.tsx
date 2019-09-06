@@ -1,15 +1,18 @@
 import * as React from 'react';
 import {Route, Switch, Redirect} from 'react-router';
 import { hot } from 'react-hot-loader/root'
-import {ChannelList} from "./components/CaseList";
+import CaseList from "./components/CaseList";
 import {Home} from "./components/Home";
 import { Header } from './components/Header';
+import { CaseUpload } from './components/CaseUpload';
 
-export const Routes = hot(() => <>
+export const Routes = hot(() => 
+    <>
         <Header />
         <Switch>
             <Route exact path={'/'} component={Home} />
-            <Route path={'/cases'} component={ChannelList} />
+            <Route exact path={'/cases'} component={CaseList} />
+            <Route path={'/cases/:caseId/upload'} component={CaseUpload} />
             <Redirect to={'/'} />
         </Switch>
     </>

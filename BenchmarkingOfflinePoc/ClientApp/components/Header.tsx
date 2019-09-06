@@ -16,7 +16,7 @@ export class Header extends React.Component<{}, {}> {
                     to={'/cases'}
                     activeClassName='active'
                 >
-                    <NavItem>Cases TEST</NavItem>
+                    <NavItem>Cases</NavItem>
                 </LinkContainer>
             </Nav>
         </Navbar>;

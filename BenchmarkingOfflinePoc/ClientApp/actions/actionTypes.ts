@@ -1,19 +1,19 @@
 import * as defs from '../definitions/definitions';
 import {RouterAction} from "connected-react-router";
+import { CaseActions } from './CaseActions';
 
 export enum ActionTypes {
-    LOAD_USERS = "LOAD_USERS",
-    LOAD_CASES = "LOAD_CASES"
+    ERROR_GENERATED = "ERROR_GENERATED"
 }
 
-export type Action = RouterAction | loadUsersAction | loadCasesAction;
+export type AllActions = RouterAction | CaseActions | errorGeneratedAction;
 
-export interface loadUsersAction {
-    type: ActionTypes.LOAD_USERS;
-    users: defs.User[];
+export interface errorGeneratedAction {
+    type: ActionTypes.ERROR_GENERATED;
+    error: string;
 }
 
-export interface loadCasesAction {
-    type: ActionTypes.LOAD_CASES;
-    channels: defs.Case[];
-}
+//export interface loadUsersAction {
+//    type: ActionTypes.LOAD_USERS;
+//    users: defs.User[];
+//}
