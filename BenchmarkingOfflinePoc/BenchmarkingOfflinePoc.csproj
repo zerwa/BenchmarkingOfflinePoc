@@ -27,10 +27,14 @@
     <None Remove="ClientApp\reducers\CaseReducer.tsx" />
     <None Remove="ClientApp\reducers\Store.tsx" />
     <None Remove="Migrations\Script0001 - Create Case table and data.sql" />
+    <None Remove="Migrations\Script0002 - Create Metric tables.sql" />
+    <None Remove="Migrations\Script0003 - Template creation.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Migrations\Script0001 - Create Case table and data.sql" />
+    <EmbeddedResource Include="Migrations\Script0002 - Create Metric tables.sql" />
+    <EmbeddedResource Include="Migrations\Script0003 - Template creation.sql" />
   </ItemGroup>
 
   <ItemGroup>

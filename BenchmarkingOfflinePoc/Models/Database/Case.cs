@@ -14,5 +14,10 @@ namespace BenchmarkingOfflinePoc.Models.Database
         [Required]
         [StringLength(5)]
         public string CaseCode { get; set; }
+        public int? FunctionId { get; set; }
+
+        [ForeignKey("FunctionId")]
+        [InverseProperty("Case")]
+        public Function Function { get; set; }
     }
 }

@@ -11,11 +11,11 @@ INSERT INTO MetricType VALUES
 ('CHECKBOX');
 
 CREATE TABLE SystemMetric (
-	[SystemMetricIc] INT IDENTITY,
+	[SystemMetricId] INT IDENTITY,
 	[SystemMetricName] NVARCHAR(50),
 	[SystemMetricDisplayName] NVARCHAR(50),
 	[MetricTypeId] INT,
-	PRIMARY KEY ([SystemMetricIc]),
+	PRIMARY KEY ([SystemMetricId]),
 	CONSTRAINT FK_SystemMetric_MetricType FOREIGN KEY ([MetricTypeId]) REFERENCES MetricType ([MetricTypeId])
 );
 
