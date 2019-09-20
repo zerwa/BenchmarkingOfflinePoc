@@ -13,7 +13,7 @@ export interface ICaseState {
 
 // Define the initial state
 const initialCaseState: ICaseState = {
-    cases: [],
+    cases: []
 };
 
 export const caseReducer: Reducer<ICaseState, CaseActions> = (
@@ -21,7 +21,7 @@ export const caseReducer: Reducer<ICaseState, CaseActions> = (
     action
 ) => {
     switch (action.type) {
-        case CaseActionTypes.GET_ALL: {
+        case CaseActionTypes.GET_ALL_CASES: {
             return {
                 ...state,
                 cases: action.cases,

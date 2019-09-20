@@ -63,10 +63,10 @@ namespace BenchmarkingOfflinePoc.Middleware
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 }));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                throw;
+                //context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                throw e;
             }
         }
     }

@@ -11,7 +11,7 @@ export class Home extends React.Component<{}> {
         return (
             <Grid>
                 <Row>
-                    <Col xs={6}>
+                    <Col xs={12}>
                         <Panel>
                             <Panel.Heading>App Root</Panel.Heading>
                             <Panel.Body>
@@ -31,9 +31,6 @@ export class Home extends React.Component<{}> {
                                 <Link to='/cases'>Go to case list</Link>
                             </Panel.Footer>
                         </Panel>
-                    </Col>
-                    <Col xs={6}>
-                        Content on right half of screen
                     </Col>
                 </Row>
             </Grid>

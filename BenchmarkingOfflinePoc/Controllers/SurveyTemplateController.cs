@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace BenchmarkingOfflinePoc.Controllers
 {
-    [Route("api/surveyTemplate")]
+    [Route("api/survey-templates")]
     public class SurveyTemplateController : Controller
     {
         readonly SurveyTemplateService surveyTemplateService;

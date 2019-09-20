@@ -3,6 +3,7 @@ import {connectRouter} from 'connected-react-router';
 import { History } from "history";
 import { caseReducer } from './CaseReducer';
 import { IAppState } from '../definitions/definitions';
+import { templateReducer } from "./TemplateReducer";
 
 //export const initialUserState: defs.State['users'] = null;
 
@@ -10,7 +11,7 @@ import { IAppState } from '../definitions/definitions';
 //    switch(action.type) {
 //        case ActionTypes.LOAD_USERS: {
 //            return action.users;
-//        }
+//        } 
 //    }
 //    return state;
 //};
@@ -29,5 +30,6 @@ import { IAppState } from '../definitions/definitions';
 // Create the root reducer
 export const createRootReducer = (history: History) => combineReducers<IAppState>({
     caseState: caseReducer,
+    templateState: templateReducer,
     router: connectRouter(history)
 });

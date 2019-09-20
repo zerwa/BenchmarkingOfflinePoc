@@ -13,15 +13,16 @@ namespace BenchmarkingOfflinePoc.Services
 
         public SurveyTemplateService(OfflinePocDb offlinePocDb)
         {
-            context = offlinePocDb;
+            this.context = offlinePocDb;
         }
 
         public async Task<List<SurveyTemplate>> GetAllSurveyTemplates()
         {
             return await context.SurveyTemplate
                 .Include(st => st.Tab)
-                .ThenInclude(t => t.Question)
-                .ThenInclude(q => q.SurveyMetricMetadata)
+                    .ThenInclude(t => t.Question)
+                    .ThenInclude(q => q.SurveyMetricMetadata)
+                        .ThenInclude(smm => smm.MetricType)
                 .ToListAsync();
         }
     }

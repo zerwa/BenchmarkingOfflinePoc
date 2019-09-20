@@ -16,7 +16,7 @@ namespace BenchmarkingOfflinePoc.Controllers
         }
 
 		[HttpGet]
-		public async Task<IActionResult> GetCases()
+        public async Task<IActionResult> GetCases()
 		{
             var cases = await caseService.GetCases();
             return Json(cases);

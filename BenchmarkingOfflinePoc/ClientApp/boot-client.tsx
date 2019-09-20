@@ -15,6 +15,7 @@ import 'es6-promise/auto';
 import 'bootstrap/dist/css/bootstrap.css'
 import configureStore from './store/Store';
 import { getAllCases } from './actions/CaseActions';
+import { getAllSurveyTemplates } from './actions/TemplateActions';
 
 const message: string = "this is the client";
 console.log(message);
@@ -24,6 +25,7 @@ const history = createBrowserHistory();
 //configure store based on https://github.com/supasate/connected-react-router
 const store = configureStore(history);
 store.dispatch<any>(getAllCases());
+store.dispatch<any>(getAllSurveyTemplates());
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {

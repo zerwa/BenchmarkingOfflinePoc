@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>3.5</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <IsPackable>false</IsPackable>
     <DefaultItemExcludes>$(DefaultItemExcludes);node_modules\**</DefaultItemExcludes>
   </PropertyGroup>
@@ -23,9 +23,13 @@
 
   <ItemGroup>
     <None Remove="ClientApp\actions\CaseActions.tsx" />
+    <None Remove="ClientApp\actions\TemplateActions.tsx" />
     <None Remove="ClientApp\components\Header.tsx" />
+    <None Remove="ClientApp\components\Question.tsx" />
+    <None Remove="ClientApp\definitions\models.ts" />
     <None Remove="ClientApp\reducers\CaseReducer.tsx" />
     <None Remove="ClientApp\reducers\Store.tsx" />
+    <None Remove="ClientApp\reducers\TemplateReducer.tsx" />
     <None Remove="Migrations\Script0001 - Create Case table and data.sql" />
     <None Remove="Migrations\Script0002 - Create Metric tables.sql" />
     <None Remove="Migrations\Script0003 - Template creation.sql" />
@@ -53,8 +57,12 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\actions\CaseActions.tsx" />
+    <TypeScriptCompile Include="ClientApp\actions\TemplateActions.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Header.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Question.tsx" />
+    <TypeScriptCompile Include="ClientApp\definitions\models.ts" />
     <TypeScriptCompile Include="ClientApp\reducers\CaseReducer.tsx" />
+    <TypeScriptCompile Include="ClientApp\reducers\TemplateReducer.tsx" />
     <TypeScriptCompile Include="ClientApp\store\Store.tsx" />
   </ItemGroup>
 
@@ -86,5 +94,21 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
 
 </Project>
