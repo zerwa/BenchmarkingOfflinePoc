@@ -29,9 +29,13 @@ store.dispatch<any>(getAllSurveyTemplates());
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-        navigator.serviceWorker.register("dist/sw.js")
-            .catch(function () {
-                console.info('Service workers are not supported.');
+        navigator.serviceWorker.register("sw.js")
+            .then(function (registration) {
+                console.log('Service worker successfully registered on scope', registration.scope);
+            })
+            .catch(function (error) {
+                console.log(error);
+                console.log('Service workers are not supported.');
             });
     })
 }

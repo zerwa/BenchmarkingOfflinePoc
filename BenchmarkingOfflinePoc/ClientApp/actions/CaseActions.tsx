@@ -32,9 +32,19 @@ export const getAllCases: ActionCreator<
 > = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const response = await axios.get<defs.Case[]>('/api/cases');
+            let cases: defs.Case[] = [];
+
+            if (!navigator.onLine) {
+                cases = JSON.parse(localStorage.getItem("cases") || "[]");
+            }
+            else {
+                const response = await axios.get<defs.Case[]>('/api/cases');
+                cases = response.data;
+                localStorage.setItem("cases", JSON.stringify(cases));
+            }
+
             dispatch({
-                cases: response.data,
+                cases: cases,
                 type: CaseActionTypes.GET_ALL_CASES,
             });
         } catch (err) {

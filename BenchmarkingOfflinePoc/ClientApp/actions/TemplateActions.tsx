@@ -7,6 +7,7 @@ import * as defs from '../definitions/definitions';
 
 // Import Character Typing
 import { ITemplateState } from '../reducers/TemplateReducer';
+import { resolve } from 'url';
 
 // Create Action Constants
 export enum TemplateActionTypes {
@@ -32,9 +33,19 @@ export const getAllSurveyTemplates: ActionCreator<
 > = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const response = await axios.get<defs.SurveyTemplate[]>('/api/survey-templates');
+            let templates: defs.SurveyTemplate[] = [];
+
+            if (!navigator.onLine) {
+                templates = JSON.parse(localStorage.getItem("templates") || "[]");
+            }
+            else {
+                const response = await axios.get<defs.SurveyTemplate[]>('/api/survey-templates');
+                templates = response.data;
+                localStorage.setItem("templates", JSON.stringify(templates));
+            }
+
             dispatch({
-                templates: response.data,
+                templates: templates,
                 type: TemplateActionTypes.GET_ALL_TEMPLATES,
             });
         } catch (err) {

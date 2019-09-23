@@ -56,7 +56,7 @@ var config = (env, options) => {
             new CleanWebpackPlugin(),
             new WorkboxWebpackPlugin.InjectManifest({
                 swSrc: "./ClientApp/src-sw.js",
-                swDest: "sw.js"
+                swDest: "../sw.js",
             })
         ]
     };

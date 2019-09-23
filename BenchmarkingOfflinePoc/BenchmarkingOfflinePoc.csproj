@@ -45,7 +45,6 @@
     <Folder Include="Migrations\Manual\" />
     <Folder Include="Models\DatabaseExtensions\" />
     <Folder Include="Util\" />
-    <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
