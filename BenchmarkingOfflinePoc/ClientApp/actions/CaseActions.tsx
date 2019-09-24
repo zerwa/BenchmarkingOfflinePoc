@@ -7,6 +7,7 @@ import * as defs from '../definitions/definitions';
 
 // Import Character Typing
 import { ICaseState } from '../reducers/CaseReducer';
+import { OfflineAction } from '@redux-offline/redux-offline/lib/types';
 
 // Create Action Constants
 export enum CaseActionTypes {
@@ -16,7 +17,7 @@ export enum CaseActionTypes {
 // Interface for Get All Action Type
 export interface ICaseGetAllAction {
     type: CaseActionTypes.GET_ALL_CASES;
-    cases: defs.Case[];
+    payload: defs.Case[];
 }
 
 /* 
@@ -44,7 +45,7 @@ export const getAllCases: ActionCreator<
             }
 
             dispatch({
-                cases: cases,
+                payload: cases,
                 type: CaseActionTypes.GET_ALL_CASES,
             });
         } catch (err) {

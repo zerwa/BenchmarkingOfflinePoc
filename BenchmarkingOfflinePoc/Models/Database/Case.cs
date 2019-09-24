@@ -7,6 +7,11 @@ namespace BenchmarkingOfflinePoc.Models.Database
 {
     public partial class Case
     {
+        public Case()
+        {
+            SurveyMetric = new HashSet<SurveyMetric>();
+        }
+
         public int CaseId { get; set; }
         [Required]
         [StringLength(50)]
@@ -19,5 +24,7 @@ namespace BenchmarkingOfflinePoc.Models.Database
         [ForeignKey("FunctionId")]
         [InverseProperty("Case")]
         public Function Function { get; set; }
+        [InverseProperty("Case")]
+        public ICollection<SurveyMetric> SurveyMetric { get; set; }
     }
 }

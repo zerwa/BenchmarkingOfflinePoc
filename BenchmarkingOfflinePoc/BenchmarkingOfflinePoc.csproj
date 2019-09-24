@@ -9,6 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\DatabaseExtensions\**" />
+    <Compile Remove="Util\**" />
+    <Content Remove="Models\DatabaseExtensions\**" />
+    <Content Remove="Util\**" />
+    <EmbeddedResource Remove="Models\DatabaseExtensions\**" />
+    <EmbeddedResource Remove="Util\**" />
+    <None Remove="Models\DatabaseExtensions\**" />
+    <None Remove="Util\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="dbup-core" Version="4.2.0" />
     <PackageReference Include="dbup-sqlserver" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -23,13 +34,13 @@
 
   <ItemGroup>
     <None Remove="ClientApp\actions\CaseActions.tsx" />
-    <None Remove="ClientApp\actions\TemplateActions.tsx" />
+    <None Remove="ClientApp\actions\SurveyActions.tsx" />
     <None Remove="ClientApp\components\Header.tsx" />
     <None Remove="ClientApp\components\Question.tsx" />
     <None Remove="ClientApp\definitions\models.ts" />
     <None Remove="ClientApp\reducers\CaseReducer.tsx" />
     <None Remove="ClientApp\reducers\Store.tsx" />
-    <None Remove="ClientApp\reducers\TemplateReducer.tsx" />
+    <None Remove="ClientApp\reducers\SurveyReducer.tsx" />
     <None Remove="Migrations\Script0001 - Create Case table and data.sql" />
     <None Remove="Migrations\Script0002 - Create Metric tables.sql" />
     <None Remove="Migrations\Script0003 - Template creation.sql" />
@@ -43,8 +54,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\Manual\" />
-    <Folder Include="Models\DatabaseExtensions\" />
-    <Folder Include="Util\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
@@ -56,12 +65,12 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\actions\CaseActions.tsx" />
-    <TypeScriptCompile Include="ClientApp\actions\TemplateActions.tsx" />
+    <TypeScriptCompile Include="ClientApp\actions\SurveyActions.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Header.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Question.tsx" />
     <TypeScriptCompile Include="ClientApp\definitions\models.ts" />
     <TypeScriptCompile Include="ClientApp\reducers\CaseReducer.tsx" />
-    <TypeScriptCompile Include="ClientApp\reducers\TemplateReducer.tsx" />
+    <TypeScriptCompile Include="ClientApp\reducers\SurveyReducer.tsx" />
     <TypeScriptCompile Include="ClientApp\store\Store.tsx" />
   </ItemGroup>
 

@@ -1,13 +1,13 @@
-importScripts("/dist/precache-manifest.ce4f15fded6236dde4680587a590f7c6.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/dist/precache-manifest.ce12fb58fc389cdd606525ef64e1e424.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 ﻿const FILES_TO_CACHE = [
     '/offline',
     '/'
 ];
 
-workbox.setConfig({
-    debug: true
-});
+//workbox.setConfig({
+//    debug: true
+//});
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 

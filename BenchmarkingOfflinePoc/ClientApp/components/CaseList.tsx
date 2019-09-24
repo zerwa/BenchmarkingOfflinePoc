@@ -65,10 +65,13 @@ class CaseList extends React.Component<FullParams, localState> {
                                             this.props.cases.map(c =>
                                                 <ListGroupItem key={c.caseId}>
                                                     <Row>
-                                                        <Col xs={6}>
+                                                        <Col xs={4}>
                                                             {c.caseName}
                                                         </Col>
-                                                        <Col xs={6}>
+                                                        <Col xs={4}>
+                                                            {c.caseCode}
+                                                        </Col>
+                                                        <Col xs={4}>
                                                             <Link to={`${this.props.match.url}/${c.caseId}/upload`}>
                                                                 View Case Upload
                                                             </Link>

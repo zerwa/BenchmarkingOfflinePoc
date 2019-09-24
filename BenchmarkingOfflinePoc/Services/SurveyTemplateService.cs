@@ -25,5 +25,25 @@ namespace BenchmarkingOfflinePoc.Services
                         .ThenInclude(smm => smm.MetricType)
                 .ToListAsync();
         }
+
+        public async Task<List<SurveyMetric>> GetAllSurveyMetrics()
+        {
+            return await context.SurveyMetric
+                .ToListAsync();
+        }
+
+        public async Task AddOrUpdateSurveyMetric(SurveyMetric surveyMetric)
+        {
+            if(surveyMetric.SurveyMetricId != 0)
+            {
+                context.SurveyMetric.Update(surveyMetric);
+            }
+            else
+            {
+                context.SurveyMetric.Add(surveyMetric);
+            }
+
+            await context.SaveChangesAsync();
+        }
     }
 }

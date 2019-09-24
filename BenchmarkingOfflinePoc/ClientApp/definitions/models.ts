@@ -24,11 +24,13 @@ export interface SystemMetric {
 export interface SurveyMetric {
     surveyMetricId: number | null;
     surveyMetricMetadataId: number | null;
+    caseId: number | null;
     numberValue: number | null;
     dateValue: Date | null;
     booleanValue: boolean | null;
     textValue: string | null;
     surveyMetricMetadata?: SurveyMetricMetadata | null;
+    case?: Case | null;
 }
 
 export interface SurveyMetricMetadata {
@@ -76,6 +78,8 @@ export const getDefaultSurveyMetric = (): SurveyMetric => ({
     numberValue: null,
     textValue: null,
     surveyMetricId: 0,
+    caseId: 0,
+    case: null,
     surveyMetricMetadata: null,
     surveyMetricMetadataId: null
 })

@@ -15,7 +15,7 @@ import 'es6-promise/auto';
 import 'bootstrap/dist/css/bootstrap.css'
 import configureStore from './store/Store';
 import { getAllCases } from './actions/CaseActions';
-import { getAllSurveyTemplates } from './actions/TemplateActions';
+import { getAllSurveyTemplates, getAllSurveyMetrics } from './actions/SurveyActions';
 
 const message: string = "this is the client";
 console.log(message);
@@ -39,6 +39,7 @@ const history = createBrowserHistory();
 const store = configureStore(history);
 store.dispatch<any>(getAllCases());
 store.dispatch<any>(getAllSurveyTemplates());
+store.dispatch<any>(getAllSurveyMetrics());
 
 ReactDOM.render(
     <Provider store={store}>

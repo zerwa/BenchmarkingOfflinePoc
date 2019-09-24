@@ -9,6 +9,7 @@ namespace BenchmarkingOfflinePoc.Models.Database
     {
         public int SurveyMetricId { get; set; }
         public int? SurveyMetricMetadataId { get; set; }
+        public int? CaseId { get; set; }
         public double? NumberValue { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? DateValue { get; set; }
@@ -16,6 +17,9 @@ namespace BenchmarkingOfflinePoc.Models.Database
         [Column("TEXT_VALUE")]
         public string TextValue { get; set; }
 
+        [ForeignKey("CaseId")]
+        [InverseProperty("SurveyMetric")]
+        public Case Case { get; set; }
         [ForeignKey("SurveyMetricMetadataId")]
         [InverseProperty("SurveyMetric")]
         public SurveyMetricMetadata SurveyMetricMetadata { get; set; }

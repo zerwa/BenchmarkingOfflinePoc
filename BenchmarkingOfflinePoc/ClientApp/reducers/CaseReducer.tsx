@@ -24,7 +24,7 @@ export const caseReducer: Reducer<ICaseState, CaseActions> = (
         case CaseActionTypes.GET_ALL_CASES: {
             return {
                 ...state,
-                cases: action.cases,
+                cases: action.payload,
             };
         }
         default:

@@ -64,6 +64,11 @@ namespace BenchmarkingOfflinePoc.Models.Database
 
             modelBuilder.Entity<SurveyMetric>(entity =>
             {
+                entity.HasOne(d => d.Case)
+                    .WithMany(p => p.SurveyMetric)
+                    .HasForeignKey(d => d.CaseId)
+                    .HasConstraintName("FK_SurveyMetric_Case");
+
                 entity.HasOne(d => d.SurveyMetricMetadata)
                     .WithMany(p => p.SurveyMetric)
                     .HasForeignKey(d => d.SurveyMetricMetadataId)

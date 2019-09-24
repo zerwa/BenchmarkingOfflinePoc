@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@redux-offline/redux-offline": "^2.5.2",
     "@types/es6-promise": "^3.3.0",
     "@types/react": "^16.7.17",
     "@types/react-bootstrap": "^0.32.13",

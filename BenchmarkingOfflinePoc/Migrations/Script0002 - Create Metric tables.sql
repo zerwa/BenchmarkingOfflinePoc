@@ -48,10 +48,12 @@ INSERT INTO SurveyMetricMetadata VALUES
 CREATE TABLE SurveyMetric (
 	[SurveyMetricId] INT IDENTITY,
 	[SurveyMetricMetadataId] INT,
+	[CaseId] INT,
 	[NumberValue] FLOAT,
 	[DateValue] DATETIME,
 	[BooleanValue] BIT,
 	[TEXT_VALUE] NVARCHAR(MAX)
 	PRIMARY KEY ([SurveyMetricId]),
-	CONSTRAINT FK_SurveyMetric_SurveyMetricMetadata FOREIGN KEY ([SurveyMetricMetadataId]) REFERENCES SurveyMetricMetadata ([SurveyMetricMetadataId])
+	CONSTRAINT FK_SurveyMetric_SurveyMetricMetadata FOREIGN KEY ([SurveyMetricMetadataId]) REFERENCES SurveyMetricMetadata ([SurveyMetricMetadataId]),
+	CONSTRAINT FK_SurveyMetric_Case FOREIGN KEY ([CaseId]) REFERENCES [Case] ([CaseId])
 );
