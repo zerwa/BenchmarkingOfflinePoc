@@ -1,5 +1,19 @@
-﻿workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+﻿const FILES_TO_CACHE = [
+    '/offline',
+    '/'
+];
+
+workbox.setConfig({
+    debug: true
+});
+
+workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+
+workbox.precaching.precacheAndRoute(FILES_TO_CACHE);
+
 workbox.precaching.cleanupOutdatedCaches();
+
+workbox.routing.registerNavigationRoute('/');
 
 workbox.routing.registerRoute(
     new RegExp("/api/cases"),

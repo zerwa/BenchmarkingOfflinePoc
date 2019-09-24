@@ -20,13 +20,6 @@ import { getAllSurveyTemplates } from './actions/TemplateActions';
 const message: string = "this is the client";
 console.log(message);
 
-const history = createBrowserHistory();
-
-//configure store based on https://github.com/supasate/connected-react-router
-const store = configureStore(history);
-store.dispatch<any>(getAllCases());
-store.dispatch<any>(getAllSurveyTemplates());
-
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
         navigator.serviceWorker.register("sw.js")
@@ -39,6 +32,13 @@ if ("serviceWorker" in navigator) {
             });
     })
 }
+
+const history = createBrowserHistory();
+
+//configure store based on https://github.com/supasate/connected-react-router
+const store = configureStore(history);
+store.dispatch<any>(getAllCases());
+store.dispatch<any>(getAllSurveyTemplates());
 
 ReactDOM.render(
     <Provider store={store}>

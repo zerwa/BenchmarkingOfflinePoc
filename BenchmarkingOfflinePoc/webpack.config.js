@@ -23,7 +23,7 @@ var config = (env, options) => {
         output: {
             path: path.resolve(__dirname, './wwwroot/dist'),
             publicPath: '/dist/',
-            filename: isProduction ? '[name].[contenthash].js' : 'bundle.js'
+            filename: isProduction ? '[name].[contenthash].js' : 'main.[hash].bundle.js'
         },
         resolve: {
             //automatically infer '.ts' and '.tsx' when importing files
@@ -56,7 +56,7 @@ var config = (env, options) => {
             new CleanWebpackPlugin(),
             new WorkboxWebpackPlugin.InjectManifest({
                 swSrc: "./ClientApp/src-sw.js",
-                swDest: "../sw.js",
+                swDest: "../sw.js"
             })
         ]
     };
