@@ -9,6 +9,7 @@ import {push} from "connected-react-router";
 import { AllActions } from '../actions/actionTypes';
 import { IAppState, getDefaultSurveyMetric } from '../definitions/definitions';
 import { Question } from './Question';
+import { CopyModal } from './CopyModal';
 
 interface urlParams {
     caseId: string;
@@ -60,6 +61,7 @@ type fullParams = params & connectedState & connectedDispatch;
 interface localState {
     activeKey: number;
     localMetric: defs.SurveyMetric;
+    caseToCopyId: number | null;
 }
 
 class CaseUploadComponent extends React.Component<fullParams, localState> {
@@ -70,13 +72,15 @@ class CaseUploadComponent extends React.Component<fullParams, localState> {
 
         this.state = {
             activeKey: 0,
-            localMetric: { ...this.props._surveyMetric}
+            localMetric: { ...this.props._surveyMetric },
+            caseToCopyId: null
         }
 
         this.changeTab = this.changeTab.bind(this);
         this.onQuestionChange = this.onQuestionChange.bind(this);
         this.clickSave = this.clickSave.bind(this);
         this.exit = this.exit.bind(this);
+        this.onCopySelection = this.onCopySelection.bind(this);
     }
 
     clickSave() {
@@ -107,6 +111,13 @@ class CaseUploadComponent extends React.Component<fullParams, localState> {
         });
     }
 
+    onCopySelection(caseToCopy: defs.Case) {
+        console.log(caseToCopy);
+        this.setState({
+            caseToCopyId: caseToCopy.caseId
+        });
+    }
+
     render() {
         return (
             <Grid>
@@ -116,9 +127,16 @@ class CaseUploadComponent extends React.Component<fullParams, localState> {
                             this.props._case && this.props._template ?
                                 <>
                                     <Row>
-                                        <Col xs={12}>
+                                        <Col xs={3} xsOffset={6}>
+                                            <CopyModal
+                                                caseCode={this.props._case.caseCode}
+                                                functionId={this.props._case.functionId}
+                                                onCaseCopy={this.onCopySelection}
+                                            />
+                                        </Col>
+                                        <Col xs={3}>
                                             <Button
-                                                className="pull-right"
+                                                className="pull-right btn-block"
                                                 onClick={e => {
                                                     this.props.push('/cases');
                                                 }}
@@ -148,6 +166,7 @@ class CaseUploadComponent extends React.Component<fullParams, localState> {
                                                                                 .sort((a, b) => a.questionOrder - b.questionOrder)
                                                                                 .map(question => <Question
                                                                                     onRef={ref => this.childQuestions.push(ref)}
+                                                                                    copyCaseId={this.state.caseToCopyId}
                                                                                     caseId={this.props._case!.caseId}
                                                                                     question={question}
                                                                                     key={question.questionId}
@@ -164,6 +183,7 @@ class CaseUploadComponent extends React.Component<fullParams, localState> {
                                         <Panel.Footer>
                                             <Button
                                                 onClick={this.clickSave}
+                                                bsStyle="primary"
                                             >
                                                 <Glyphicon glyph="ok" /> Save Progress
                                             </Button>

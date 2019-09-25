@@ -16,8 +16,6 @@ interface IProps {
 
 interface params extends RouteComponentProps<urlParams> {}
 
-interface localState {}
-
 const mapStateToProps = (store: IAppState) => {
     return {
         cases: store.caseState.cases
@@ -26,38 +24,20 @@ const mapStateToProps = (store: IAppState) => {
 
 export type FullParams = params & IProps;
 
-class CaseList extends React.Component<FullParams, localState> {
-    constructor(p: FullParams) {
-        super(p);
-
-        this.state = {};
-
-        this.reloadCases = this.reloadCases.bind(this);
-    }
-
-    componentDidMount() {
-        this.reloadCases();
-    }
-
-    // Right now, we're front-loading the application. So all of the data we need will be loaded on page-load.
-    // Realistically, this would probably need to change
-    reloadCases() {
-        //axios.get<defs.Case[]>("/api/cases").then((response) => {
-        //    this.setState({
-        //        cases: response.data
-        //    });
-        //}).catch(error => {
-        //    console.log(error)
-        //});
-    }
-
+class CaseList extends React.Component<FullParams, {}> {
     render() {
         return (
             <Grid>
                 <Row>
                     <Col xs={12}>
                         <Panel>
-                            <Panel.Heading>Available Cases</Panel.Heading>
+                            <Panel.Heading>
+                                <Row>
+                                    <Col xs={3}>Available Cases</Col>
+                                    <Col xs={3}>Case Code</Col>
+                                    <Col xs={3}>Function</Col>
+                                </Row>
+                            </Panel.Heading>
                             {
                                 this.props.cases ?
                                     <ListGroup>
@@ -65,13 +45,16 @@ class CaseList extends React.Component<FullParams, localState> {
                                             this.props.cases.map(c =>
                                                 <ListGroupItem key={c.caseId}>
                                                     <Row>
-                                                        <Col xs={4}>
+                                                        <Col xs={3}>
                                                             {c.caseName}
                                                         </Col>
-                                                        <Col xs={4}>
+                                                        <Col xs={3}>
                                                             {c.caseCode}
                                                         </Col>
-                                                        <Col xs={4}>
+                                                        <Col xs={3}>
+                                                            {c.function ? c.function.functionDisplayName : c.functionId}
+                                                        </Col>
+                                                        <Col xs={3}>
                                                             <Link to={`${this.props.match.url}/${c.caseId}/upload`}>
                                                                 View Case Upload
                                                             </Link>
@@ -86,7 +69,7 @@ class CaseList extends React.Component<FullParams, localState> {
                         </Panel>
                     </Col>
                 </Row>
-                <Alert bsStyle="warning">Select a case to upload data</Alert>
+                <Alert bsStyle="warning">Select a case to input data</Alert>
                 <Row>
                     <Col xs={12}>
                         <Link to='/'>

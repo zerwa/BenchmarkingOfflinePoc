@@ -18,7 +18,9 @@ namespace BenchmarkingOfflinePoc.Services
 
         public async Task<List<Case>> GetCases()
         {
-            return await context.Case.ToListAsync();
+            return await context.Case
+                .Include(c => c.Function)
+                .ToListAsync();
         }
 
         public async Task AddCase(string caseName, string caseCode)

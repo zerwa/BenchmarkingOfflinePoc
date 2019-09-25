@@ -1,4 +1,4 @@
-importScripts("/dist/precache-manifest.ce12fb58fc389cdd606525ef64e1e424.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/dist/precache-manifest.ba8c4eb0731463a9d4efcc328b5d967b.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 ﻿const FILES_TO_CACHE = [
     '/offline',

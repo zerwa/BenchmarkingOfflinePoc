@@ -6,7 +6,7 @@
 );
 
 INSERT INTO [Function] VALUES
-	('TEST', 'Test Function');
+	('PROCUREMENT', 'Procurement');
 
 CREATE TABLE [Case] (
 	[CaseId] INT IDENTITY,
@@ -20,7 +20,7 @@ CREATE TABLE [Case] (
 -- Insert test Cases
 INSERT INTO [Case]
 VALUES 
-	('Test Case 1', 'X012', (SELECT FunctionId FROM [Function])),
-	('Test Case 2', 'WA09', (SELECT FunctionId FROM [Function])),
-	('Test Case 3', 'N1JH', (SELECT FunctionId FROM [Function])),
-	('Test Case 4', '89JS', (SELECT FunctionId FROM [Function]));
+	('Test Case 1', 'X012', (SELECT FunctionId FROM [Function] WHERE FunctionName = 'PROCUREMENT')),
+	('Test Case 2', 'WA09', (SELECT FunctionId FROM [Function] WHERE FunctionName = 'PROCUREMENT')),
+	('Test Case 3', 'N1JH', (SELECT FunctionId FROM [Function] WHERE FunctionName = 'PROCUREMENT')),
+	('Test Case 4', '89JS', (SELECT FunctionId FROM [Function] WHERE FunctionName = 'PROCUREMENT'));

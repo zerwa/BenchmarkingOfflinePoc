@@ -35,6 +35,7 @@
   <ItemGroup>
     <None Remove="ClientApp\actions\CaseActions.tsx" />
     <None Remove="ClientApp\actions\SurveyActions.tsx" />
+    <None Remove="ClientApp\components\CopyModal.tsx" />
     <None Remove="ClientApp\components\Header.tsx" />
     <None Remove="ClientApp\components\Question.tsx" />
     <None Remove="ClientApp\definitions\models.ts" />
@@ -44,12 +45,14 @@
     <None Remove="Migrations\Script0001 - Create Case table and data.sql" />
     <None Remove="Migrations\Script0002 - Create Metric tables.sql" />
     <None Remove="Migrations\Script0003 - Template creation.sql" />
+    <None Remove="Migrations\Script0004 - Additional Template.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Migrations\Script0001 - Create Case table and data.sql" />
     <EmbeddedResource Include="Migrations\Script0002 - Create Metric tables.sql" />
     <EmbeddedResource Include="Migrations\Script0003 - Template creation.sql" />
+    <EmbeddedResource Include="Migrations\Script0004 - Additional Template.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -66,6 +69,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\actions\CaseActions.tsx" />
     <TypeScriptCompile Include="ClientApp\actions\SurveyActions.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\CopyModal.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Header.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Question.tsx" />
     <TypeScriptCompile Include="ClientApp\definitions\models.ts" />

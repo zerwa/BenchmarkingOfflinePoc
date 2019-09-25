@@ -3,6 +3,7 @@
     caseName: string;
     caseCode: number;
     functionId: number;
+    function?: Function | null;
 }
 
 export interface MetricType {

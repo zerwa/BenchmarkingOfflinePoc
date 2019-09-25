@@ -18,11 +18,13 @@ export interface Question {
 interface params {
     caseId: number;
     question: defs.Question;
+    copyCaseId: number | null;
     onRef?: (component: Question) => void;
 }
 
 interface connectedState {
     _surveyMetric: defs.SurveyMetric;
+    _likeMetric: defs.SurveyMetric | null;
 }
 
 const mapStateToProps = (state: IAppState, ownProps: params): connectedState => {
@@ -32,20 +34,26 @@ const mapStateToProps = (state: IAppState, ownProps: params): connectedState => 
         caseId: ownProps.caseId
     };
 
+    let likeMetric: defs.SurveyMetric | null = null;
+
+    if (state.surveyState && state.surveyState.metrics && ownProps.copyCaseId) {
+        likeMetric = state.surveyState.metrics
+            .find(m => m.caseId == ownProps.copyCaseId && m.surveyMetricMetadataId == ownProps.question.surveyMetricMetadataId) || null;
+    }
+
     //select the specific channel from redux matching the channelId route parameter
     if (state.surveyState && state.surveyState.metrics) {
         const metric = state.surveyState.metrics
             .find(m => m.caseId == ownProps.caseId && m.surveyMetricMetadataId == ownProps.question.surveyMetricMetadataId);
 
         if (metric) {
-            console.log("new metric");
-            console.log(metric);
             _metric = { ...metric };
         }
     }
 
     return {
-        _surveyMetric: _metric
+        _surveyMetric: _metric,
+        _likeMetric: likeMetric
     };
 };
 
@@ -59,6 +67,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>): conne
 
 interface localState {
     localMetric: defs.SurveyMetric;
+    copyCaseId: number | null;
 }
 
 const SURVEY_CHECKING_PARAMS: (keyof SurveyMetric)[] = [
@@ -75,7 +84,8 @@ class QuestionComponent extends React.Component<fullParams, localState> implemen
         super(p);
 
         this.state = {
-            localMetric: { ...this.props._surveyMetric }
+            localMetric: { ...this.props._surveyMetric },
+            copyCaseId: this.props.copyCaseId
         }
 
         this.renderSwitch = this.renderSwitch.bind(this);
@@ -89,15 +99,33 @@ class QuestionComponent extends React.Component<fullParams, localState> implemen
     }
 
     static getDerivedStateFromProps(nextProps: fullParams, prevState: localState) {
+        let nextState: Partial<localState> = {};
+
         if (nextProps._surveyMetric.surveyMetricId !== prevState.localMetric.surveyMetricId) {
             // do things with nextProps.someProp and prevState.cachedSomeProp
-            return {
-                localMetric: {
+                nextState.localMetric = {
                     ...prevState.localMetric,
                     surveyMetricId: nextProps._surveyMetric.surveyMetricId
                 }
-                // ... other derived state properties
-            };
+        }
+
+        if (nextProps.copyCaseId !== prevState.copyCaseId) {
+            nextState.copyCaseId = nextProps.copyCaseId;
+
+            if (nextProps._likeMetric) {
+                nextState.localMetric = {
+                    ...prevState.localMetric,
+                    booleanValue: nextProps._likeMetric.booleanValue,
+                    dateValue: nextProps._likeMetric.dateValue,
+                    textValue: nextProps._likeMetric.textValue,
+                    numberValue: nextProps._likeMetric.numberValue
+                };
+                console.log(nextState);
+            }
+        }
+
+        if (Object.keys(nextState).length) {
+            return nextState;
         }
         else {
             return null;
@@ -130,7 +158,6 @@ class QuestionComponent extends React.Component<fullParams, localState> implemen
     }
 
     metricChange(surveyMetric: defs.SurveyMetric) {
-        console.log("change");
         this.setState({
             localMetric: { ...surveyMetric }
         });
@@ -240,12 +267,12 @@ class CheckBox extends React.Component<pickerParams, {}> {
         return <>
             <Radio
                 className="label-text"
-                checked={this.props.localMetric.booleanValue || false}
+                checked={this.props.localMetric.booleanValue === true}
                 value={"yes"}
                 onChange={e => {
                     this.props.onChange({
                         ...this.props.localMetric,
-                        booleanValue: !this.props.localMetric.booleanValue
+                        booleanValue: true
                     })
                 }}
             >
@@ -253,12 +280,12 @@ class CheckBox extends React.Component<pickerParams, {}> {
             </Radio>
             <Radio
                 className="label-text"
-                checked={!this.props.localMetric.booleanValue}
+                checked={this.props.localMetric.booleanValue === false}
                 value={"no"}
                 onChange={e => {
                     this.props.onChange({
                         ...this.props.localMetric,
-                        booleanValue: !this.props.localMetric.booleanValue
+                        booleanValue: false
                     })
                 }}
             >
